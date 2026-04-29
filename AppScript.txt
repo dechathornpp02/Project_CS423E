@@ -1,0 +1,28 @@
+function doPost(e) {
+  try {
+    var data = JSON.parse(e.postData.contents);
+    
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    var timestamp = new Date();
+    var device = data.device;
+    var distance = data.distance;
+    
+    var vibration = data.vibration == 1 ? "🫨 VIBRATION!" : "STABLE";
+    
+    var event = data.event || "NORMAL"; 
+    
+    var people = data.people || 0; 
+    
+    sheet.appendRow([timestamp, device, distance, vibration, event, people]);
+    
+    return ContentService.createTextOutput(JSON.stringify({"result":"success"}))
+                         .setMimeType(ContentService.MimeType.JSON);
+                         
+  } catch (f) {
+    return ContentService.createTextOutput(JSON.stringify({"result":"error", "error": f.toString()}))
+                         .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+
