@@ -3,7 +3,7 @@ import numpy as np
 import requests
 import time
 
-esp32_ip = "172.20.10.2" 
+esp32_ip = "ใส่ IP ESP32 ตรงนี้ของตัวเอง" 
 url_open = f"http://{esp32_ip}/open"
 
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
